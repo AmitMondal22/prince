@@ -26,6 +26,9 @@ Route::prefix('assets')->group(function () {
     Route::prefix('unit')->group(function () {
         Route::post('/add',[Assets::class,'unit_add']);
     });
+    Route::prefix('product')->group(function () {
+        Route::post('/add',[Assets::class,'product_add']);
+    });
 });
 
 Route::prefix('auth')->group(function () {
