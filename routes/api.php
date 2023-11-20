@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\customer\api_controller\Assets;
 use App\Http\Controllers\customer\api_controller\CustomerApiAuth;
+use App\Http\Controllers\customer\api_controller\Label1Action;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -22,7 +23,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 
-Route::middleware(['auth:sanctum', 'user-access:user1'])->group(function () {
+Route::middleware(['auth:sanctum'])->group(function () {
     Route::prefix('assets')->group(function () {
         Route::prefix('unit')->group(function () {
             Route::post('/add', [Assets::class, 'unit_add']);
@@ -33,6 +34,13 @@ Route::middleware(['auth:sanctum', 'user-access:user1'])->group(function () {
             Route::get('/list', [Assets::class, 'list_product_mastar']);
         });
     });
+});
+
+Route::middleware(['auth:sanctum', 'user-access:user1'])->group(function () {
+    Route::prefix('l1')->group(function () {
+        Route::post('/add', [Label1Action::class, 'add']);
+    });
+
 });
 
 Route::prefix('auth')->group(function () {
