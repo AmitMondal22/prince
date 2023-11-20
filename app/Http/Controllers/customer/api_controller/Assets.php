@@ -47,10 +47,12 @@ class Assets extends ResponceBaseController
             if ($valaditor->fails()) {
                 return $this->sendError("request validation error", $valaditor->errors(), 400);
             }
-            $data = MdProduct::create(['product_name' => $r->product_name,
-                                        'unit_id' => $r->unit_id,
-                                        'user_type' => $r->user_type,
-                                        'qty' => $r->qty]);
+            $data = MdProduct::create([
+                'product_name' => $r->product_name,
+                'unit_id' => $r->unit_id,
+                'user_type' => $r->user_type,
+                'qty' => $r->qty
+            ]);
             return $this->sendResponse($data, "new product add successfully");
         } catch (\Throwable $th) {
             return $this->sendError("exception handler error", $th, 400);
