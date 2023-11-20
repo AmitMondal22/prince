@@ -54,8 +54,16 @@ class User extends Authenticatable
      * @param  string  $value
      * @return \Illuminate\Database\Eloquent\Casts\Attribute
      */
+    /**
+     * The `type()` function returns an `Attribute` object with a custom cast for the `type` attribute
+     * of the `User` model.
+     *
+     * @return Attribute The code is returning an instance of the `Attribute` class.
+     */
     protected function type(): Attribute
     {
+       /* The code `return new Attribute(get: fn () =>  ["admin", "user1", "user2"][])` is
+       defining a custom cast for the `type` attribute of the `User` model. */
         return new Attribute(
             get: fn ($value) =>  ["admin", "user1", "user2"][$value],
         );
