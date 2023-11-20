@@ -35,6 +35,8 @@ class Assets extends ResponceBaseController
         }
     }
 
+
+
     function product_add(Request $r): JsonResponse
     {
         try {
