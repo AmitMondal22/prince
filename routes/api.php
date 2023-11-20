@@ -22,37 +22,40 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 
-Route::prefix('assets')->group(function () {
-    Route::prefix('unit')->group(function () {
-        Route::post('/add',[Assets::class,'unit_add']);
-    });
-    Route::prefix('product')->group(function () {
-        Route::post('/add',[Assets::class,'product_add']);
+Route::middleware(['auth:sanctum', 'user-access:user1'])->group(function () {
+    Route::prefix('assets')->group(function () {
+        Route::prefix('unit')->group(function () {
+            Route::post('/add', [Assets::class, 'unit_add']);
+            Route::get('/list', [Assets::class, 'list_unit']);
+        });
+        Route::prefix('product')->group(function () {
+            Route::post('/add', [Assets::class, 'product_add']);
+            Route::get('/list', [Assets::class, 'list_product_mastar']);
+        });
     });
 });
 
 Route::prefix('auth')->group(function () {
-    Route::match(['get','post'],'/register',[CustomerApiAuth::class,'register']);
+    Route::match(['get', 'post'], '/register', [CustomerApiAuth::class, 'register']);
     /* The line `Route::post('/login',[CustomerApiAuth::class,'login']);` is defining a route for the
     POST method with the URL path '/login'. When a POST request is made to this route, it will call
     the 'login' method of the 'CustomerApiAuth' class. */
-    Route::post('/login',[CustomerApiAuth::class,'login']);
+    Route::post('/login', [CustomerApiAuth::class, 'login']);
 
     Route::prefix('customer')->group(function () {
-
     });
 });
 
 
 Route::prefix('user')->group(function () {
-    Route::match(['get','post'],'/register',[CustomerApiAuth::class,'register']);
-    Route::post('/login',[CustomerApiAuth::class,'login']);
+    Route::match(['get', 'post'], '/register', [CustomerApiAuth::class, 'register']);
+    Route::post('/login', [CustomerApiAuth::class, 'login']);
 });
 
 
-Route::prefix("test")->group(function(){
-    Route::get('/test',[CustomerApiAuth::class,'test']);
+Route::prefix("test")->group(function () {
+    Route::get('/test', [CustomerApiAuth::class, 'test']);
 });
 
 
-Route::get('/', [CustomerApiAuth::class,'test']);
+Route::get('/', [CustomerApiAuth::class, 'test']);

@@ -9,6 +9,7 @@ use App\Models\MdUnit;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
+use PhpParser\Node\Stmt\TryCatch;
 
 class Assets extends ResponceBaseController
 {
@@ -54,6 +55,24 @@ class Assets extends ResponceBaseController
                 'qty' => $r->qty
             ]);
             return $this->sendResponse($data, "new product add successfully");
+        } catch (\Throwable $th) {
+            return $this->sendError("exception handler error", $th, 400);
+        }
+    }
+
+    function list_product_mastar():JsonResponse{
+        try{
+            $data=MdProduct::join("md_unit as a","a.unit_id","=","md_product.unit_id")
+                            ->select("md_product.*","a.unit_name","a.unit_size")->get();
+            return $this->sendResponse($data, "Unit List");
+        } catch (\Throwable $th) {
+            return $this->sendError("exception handler error", $th, 400);
+        }
+    }
+    function list_unit():JsonResponse{
+        try{
+            $data=MdUnit::all();
+            return $this->sendResponse($data, "Unit List");
         } catch (\Throwable $th) {
             return $this->sendError("exception handler error", $th, 400);
         }
