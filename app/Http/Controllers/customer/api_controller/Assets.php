@@ -126,6 +126,7 @@ class Assets extends ResponceBaseController
             $valaditor = Validator::make($r->all(), $rules);
             if ($valaditor->fails()) {
                 return $this->sendError("request validation error", $valaditor->errors(), 400);
+
             }
             $data = MdProduct::where("product_id",$r->product_id)->update([
                 'product_name' => $r->product_name,
