@@ -27,10 +27,12 @@ Route::middleware(['auth:sanctum'])->group(function () {
     Route::prefix('assets')->group(function () {
         Route::prefix('unit')->group(function () {
             Route::post('/add', [Assets::class, 'unit_add']);
+            Route::post('/edit', [Assets::class, 'unit_edit']);
             Route::get('/list', [Assets::class, 'list_unit']);
         });
         Route::prefix('product')->group(function () {
             Route::post('/add', [Assets::class, 'product_add']);
+            Route::post('/edit', [Assets::class, 'product_edit']);
             Route::get('/list', [Assets::class, 'list_product_mastar']);
         });
     });

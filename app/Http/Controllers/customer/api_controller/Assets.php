@@ -36,6 +36,29 @@ class Assets extends ResponceBaseController
     }
 
 
+    function unit_edit(Request $r): JsonResponse
+    {
+        try {
+            $rules = [
+                'unit_name' => 'required|string',
+                'unit_size' => 'required|integer',
+                'unit_id' => 'required|integer',
+            ];
+            $valaditor = Validator::make($r->all(), $rules);
+            if ($valaditor->fails()) {
+                return $this->sendError("request validation error", $valaditor->errors(), 400);
+            }
+            $data = MdUnit::where("unit_id",$r->unit_id)->update([
+                'unit_name' => $r->unit_name,
+                'unit_size' => $r->unit_size
+            ]);
+            return $this->sendResponse($data, "Unit Edit successfully");
+        } catch (\Throwable $th) {
+            return $this->sendError("exception handler error", $th, 400);
+        }
+    }
+
+
 
     function product_add(Request $r): JsonResponse
     {
@@ -57,6 +80,33 @@ class Assets extends ResponceBaseController
                 'qty' => $r->qty
             ]);
             return $this->sendResponse($data, "new product add successfully");
+        } catch (\Throwable $th) {
+            return $this->sendError("exception handler error", $th, 400);
+        }
+    }
+
+
+    function product_edit(Request $r): JsonResponse
+    {
+        try {
+            $rules = [
+                'product_name' => 'required|string',
+                'user_type' => 'required|string',
+                'qty' => 'required|integer',
+                'unit_id' => 'required|integer',
+                'product_id' => 'required|integer',
+            ];
+            $valaditor = Validator::make($r->all(), $rules);
+            if ($valaditor->fails()) {
+                return $this->sendError("request validation error", $valaditor->errors(), 400);
+            }
+            $data = MdProduct::where("product_id",$r->product_id)->create([
+                'product_name' => $r->product_name,
+                'unit_id' => $r->unit_id,
+                'user_type' => $r->user_type,
+                'qty' => $r->qty
+            ]);
+            return $this->sendResponse($data, "Product edit successfully");
         } catch (\Throwable $th) {
             return $this->sendError("exception handler error", $th, 400);
         }
