@@ -59,6 +59,33 @@ class Assets extends ResponceBaseController
     }
 
 
+    function list_unit():JsonResponse{
+        try{
+            $data=MdUnit::all();
+            return $this->sendResponse($data, "Unit List");
+        } catch (\Throwable $th) {
+            return $this->sendError("exception handler error", $th, 400);
+        }
+    }
+
+
+    function delete_unit(Request $r):JsonResponse{
+        try {
+            $rules = [
+                'unit_id' => 'required|integer',
+            ];
+            $valaditor = Validator::make($r->all(), $rules);
+            if ($valaditor->fails()) {
+                return $this->sendError("request validation error", $valaditor->errors(), 400);
+            }
+            $data = MdUnit::where("unit_id",$r->unit_id)->delete();
+            return $this->sendResponse($data, "Unit Delete successfully");
+        } catch (\Throwable $th) {
+            return $this->sendError("exception handler error", $th, 400);
+        }
+    }
+
+
 
     function product_add(Request $r): JsonResponse
     {
@@ -100,7 +127,7 @@ class Assets extends ResponceBaseController
             if ($valaditor->fails()) {
                 return $this->sendError("request validation error", $valaditor->errors(), 400);
             }
-            $data = MdProduct::where("product_id",$r->product_id)->create([
+            $data = MdProduct::where("product_id",$r->product_id)->update([
                 'product_name' => $r->product_name,
                 'unit_id' => $r->unit_id,
                 'user_type' => $r->user_type,
@@ -115,16 +142,26 @@ class Assets extends ResponceBaseController
     function list_product_mastar():JsonResponse{
         try{
             $data=MdProduct::join("md_unit as a","a.unit_id","=","md_product.unit_id")
+                            //->join("users as b","b.id","=","md_product.")
                             ->select("md_product.*","a.unit_name","a.unit_size")->get();
             return $this->sendResponse($data, "Unit List");
         } catch (\Throwable $th) {
             return $this->sendError("exception handler error", $th, 400);
         }
     }
-    function list_unit():JsonResponse{
-        try{
-            $data=MdUnit::all();
-            return $this->sendResponse($data, "Unit List");
+
+
+    function delete_product(Request $r):JsonResponse{
+        try {
+            $rules = [
+                'product_id' => 'required|integer',
+            ];
+            $valaditor = Validator::make($r->all(), $rules);
+            if ($valaditor->fails()) {
+                return $this->sendError("request validation error", $valaditor->errors(), 400);
+            }
+            $data = MdProduct::where("product_id",$r->product_id)->delete();
+            return $this->sendResponse($data, "Product delete successfully");
         } catch (\Throwable $th) {
             return $this->sendError("exception handler error", $th, 400);
         }
