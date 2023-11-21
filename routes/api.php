@@ -28,7 +28,7 @@ Route::middleware(['auth:sanctum'])->group(function () {
         Route::prefix('unit')->group(function () {
             Route::post('/add', [Assets::class, 'unit_add']);
             Route::post('/edit', [Assets::class, 'unit_edit']);
-            Route::post('/detete', [Assets::class, 'delete_unit']);
+            Route::post('/delete', [Assets::class, 'delete_unit']);
             Route::get('/list', [Assets::class, 'list_unit']);
         });
         Route::prefix('product')->group(function () {
