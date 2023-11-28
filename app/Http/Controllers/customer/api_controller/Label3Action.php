@@ -4,18 +4,18 @@ namespace App\Http\Controllers\customer\api_controller;
 
 use App\Http\Controllers\assets\ResponceBaseController;
 use App\Http\Controllers\Controller;
-use App\Models\TdLabel2;
+use App\Models\TdLabel3;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
-class Label2Action extends ResponceBaseController
+class Label3Action extends ResponceBaseController
 {
     function add(Request $r): JsonResponse
     {
         try {
             $rules = [
-                'l1_qty' => 'required|integer',
+                'l3_qty' => 'required|integer',
                 'product_mastar_id' => 'required|integer',
             ];
             $valaditor = Validator::make($r->all(), $rules);
@@ -23,14 +23,15 @@ class Label2Action extends ResponceBaseController
                 return $this->sendError("request validation error", $valaditor->errors(), 400);
             }
 
-            $data = TdLabel2::create(["create_by" => auth()->user()->id,
-                                        "l2_qty"=>$r->l2_qty,
+            $data = TdLabel3::create(["create_by" => auth()->user()->id,
+                                        "l2_qty"=>$r->l3_qty,
                                         "product_mastar_id"=>$r->product_mastar_id,
                                         "l3_stock"=>"A",
                                         "l3_flag"=>"A",
                                         "update_by"=>auth()->user()->id]);
 
-            return $this->sendResponse($data, "Add Label 2 successfully");
+            
+            return $this->sendResponse($data, "Add Label 3 successfully");
         } catch (\Throwable $th) {
             return $this->sendError("exception handler error", $th, 400);
         }
