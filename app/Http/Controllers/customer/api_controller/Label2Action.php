@@ -15,14 +15,14 @@ class Label2Action extends ResponceBaseController
     {
         try {
             $rules = [
-                'l1_qty' => 'required|integer',
+                'l2_qty' => 'required|integer',
                 'product_mastar_id' => 'required|integer',
             ];
             $valaditor = Validator::make($r->all(), $rules);
             if ($valaditor->fails()) {
                 return $this->sendError("request validation error", $valaditor->errors(), 400);
             }
-            
+
 
 
 
