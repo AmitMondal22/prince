@@ -4,6 +4,7 @@ namespace App\Http\Controllers\customer\api_controller;
 
 use App\Http\Controllers\assets\ResponceBaseController;
 use App\Http\Controllers\Controller;
+use App\Models\TdLabel1;
 use App\Models\TdLabel3;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
@@ -30,7 +31,8 @@ class Label3Action extends ResponceBaseController
                                         "l3_flag"=>"A",
                                         "update_by"=>auth()->user()->id]);
 
-            
+
+            $data2=TdLabel1::where("update_by",auth()->user()->id)->where("l2_stock","A")->where("l2_flag","A")->update(["l2_stock"=>"B","l2_flag"=>"B"]);
             return $this->sendResponse($data, "Add Label 3 successfully");
         } catch (\Throwable $th) {
             return $this->sendError("exception handler error", $th, 400);

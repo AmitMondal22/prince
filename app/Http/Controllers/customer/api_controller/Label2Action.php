@@ -22,6 +22,9 @@ class Label2Action extends ResponceBaseController
             if ($valaditor->fails()) {
                 return $this->sendError("request validation error", $valaditor->errors(), 400);
             }
+            
+
+
 
             $data = TdLabel2::create(["create_by" => auth()->user()->id,
                                         "l2_qty"=>$r->l2_qty,
