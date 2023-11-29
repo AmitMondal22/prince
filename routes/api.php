@@ -49,6 +49,8 @@ Route::middleware(['auth:sanctum', 'user-access:user1'])->group(function () {
         Route::post('/list', [Label1Action::class, 'list_l1']);
     });
 
+});
+    Route::middleware(['auth:sanctum', 'user-access:user2'])->group(function () {
 
     Route::prefix('l2')->group(function () {
         Route::post('/add', [Label2Action::class, 'add']);
