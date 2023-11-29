@@ -54,7 +54,7 @@ Route::middleware(['auth:sanctum', 'user-access:user2'])->group(function () {
 
     Route::prefix('l2')->group(function () {
         Route::post('/add', [Label2Action::class, 'add']);
-        // Route::post('/edit', [Label2Action::class, 'edit']);
+        Route::post('/edit', [Label2Action::class, 'edit']);
         // Route::post('/list', [Label2Action::class, 'list_l1']);
     });
 });
@@ -62,14 +62,14 @@ Route::middleware(['auth:sanctum', 'user-access:user2'])->group(function () {
 Route::middleware(['auth:sanctum', 'user-access:user3'])->group(function () {
     Route::prefix('l3')->group(function () {
         Route::post('/add', [Label3Action::class, 'add']);
-        // Route::post('/edit', [Label2Action::class, 'edit']);
+        Route::post('/edit', [Label3Action::class, 'edit']);
         // Route::post('/list', [Label2Action::class, 'list_l1']);
     });
 });
 Route::middleware(['auth:sanctum', 'user-access:user3'])->group(function () {
     Route::prefix('l4')->group(function () {
         Route::post('/add', [Label4Action::class, 'add']);
-        // Route::post('/edit', [Label2Action::class, 'edit']);
+        Route::post('/edit', [Label4Action::class, 'edit']);
         // Route::post('/list', [Label2Action::class, 'list_l1']);
     });
 });

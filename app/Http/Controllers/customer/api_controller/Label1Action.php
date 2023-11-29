@@ -49,7 +49,7 @@ class Label1Action extends ResponceBaseController
                 return $this->sendError("request validation error", $valaditor->errors(), 400);
             }
 
-            $data = TdLabel1::where("update_by",auth()->user()->id)->where("l2_stock","A")->where("l2_flag","A")->update(["create_by" => auth()->user()->id,
+            $data = TdLabel1::where("update_by",auth()->user()->id)->where("l1_stock","A")->where("l2_flag","A")->update(["create_by" => auth()->user()->id,
                                         "l1_qty"=>$r->l1_qty,
                                         "product_mastar_id"=>$r->product_mastar_id]);
 
@@ -63,9 +63,7 @@ class Label1Action extends ResponceBaseController
     function list_l1(Request $r): JsonResponse
     {
         try {
-            $data = TdLabel1::where("update_by",auth()->user()->id)->where("l2_stock","A")->where("l2_flag","A")->update(["create_by" => auth()->user()->id,
-                                        "l1_qty"=>$r->l1_qty,
-                                        "product_mastar_id"=>$r->product_mastar_id]);
+            $data = TdLabel1::where("update_by",auth()->user()->id)->where("l1_stock","A")->where("l1_flag","A")->get();
 
             return $this->sendResponse($data, "Edit Wrok item successfully");
         } catch (\Throwable $th) {
