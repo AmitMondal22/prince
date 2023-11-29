@@ -26,8 +26,8 @@ class Label1Action extends ResponceBaseController
             $data = TdLabel1::create(["create_by" => auth()->user()->id,
                                         "l1_qty"=>$r->l1_qty,
                                         "product_mastar_id"=>$r->product_mastar_id,
-                                        "l2_stock"=>"A",
-                                        "l2_flag"=>"A",
+                                        "l1_stock"=>"A",
+                                        "l1_flag"=>"A",
                                         "update_by"=>auth()->user()->id]);
 
             return $this->sendResponse($data, "Add work item successfully");

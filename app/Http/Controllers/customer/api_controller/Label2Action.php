@@ -29,8 +29,8 @@ class Label2Action extends ResponceBaseController
             $data = TdLabel2::create(["create_by" => auth()->user()->id,
                                         "l2_qty"=>$r->l2_qty,
                                         "product_mastar_id"=>$r->product_mastar_id,
-                                        "l3_stock"=>"A",
-                                        "l3_flag"=>"A",
+                                        "l2_stock"=>"A",
+                                        "l2_flag"=>"A",
                                         "update_by"=>auth()->user()->id]);
 
             return $this->sendResponse($data, "Add Label 2 successfully");

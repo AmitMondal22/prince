@@ -11,5 +11,5 @@ class TdLabel1 extends Model
 
     protected $table = 'td_label1';
     protected $primaryKey = 'label1_id';
-    protected $fillable = ["create_by", "l1_qty", "product_mastar_id", "l2_stock", "l2_flag", "update_by"];
+    protected $fillable = ["create_by", "l1_qty", "product_mastar_id", "l1_stock", "l1_flag", "update_by"];
 }

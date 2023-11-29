@@ -25,14 +25,14 @@ class Label3Action extends ResponceBaseController
             }
 
             $data = TdLabel3::create(["create_by" => auth()->user()->id,
-                                        "l2_qty"=>$r->l3_qty,
+                                        "l3_qty"=>$r->l3_qty,
                                         "product_mastar_id"=>$r->product_mastar_id,
                                         "l3_stock"=>"A",
                                         "l3_flag"=>"A",
                                         "update_by"=>auth()->user()->id]);
 
 
-            $data2=TdLabel1::where("update_by",auth()->user()->id)->where("l2_stock","A")->where("l2_flag","A")->update(["l2_stock"=>"B","l2_flag"=>"B"]);
+            //$data2=TdLabel1::where("update_by",auth()->user()->id)->where("l2_stock","A")->where("l2_flag","A")->update(["l2_stock"=>"B","l2_flag"=>"B"]);
             return $this->sendResponse($data, "Add Label 3 successfully");
         } catch (\Throwable $th) {
             return $this->sendError("exception handler error", $th, 400);
