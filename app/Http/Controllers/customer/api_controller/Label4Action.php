@@ -5,7 +5,6 @@ namespace App\Http\Controllers\customer\api_controller;
 use App\Http\Controllers\assets\ResponceBaseController;
 use App\Http\Controllers\Controller;
 use App\Models\TdLabel2;
-use App\Models\TdLabel3;
 use App\Models\TdLabel4;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
@@ -25,7 +24,7 @@ class Label4Action extends ResponceBaseController
                 return $this->sendError("request validation error", $valaditor->errors(), 400);
             }
             $data = TdLabel4::create(["create_by" => auth()->user()->id,
-                                        "l4_qty"=>$r->l3_qty,
+                                        "l4_qty"=>$r->l4_qty,
                                         "product_mastar_id"=>$r->product_mastar_id,
                                         "l4_stock"=>"A",
                                         "l4_flag"=>"A",
@@ -63,8 +62,8 @@ class Label4Action extends ResponceBaseController
                 return $this->sendError("request validation error", $valaditor->errors(), 400);
             }
 
-            $data = TdLabel2::where("update_by",auth()->user()->id)->where("l4_stock","A")->where("l4_flag","A")->update(["create_by" => auth()->user()->id,
-                                        "l4_qty"=>$r->l1_qty,
+            $data = TdLabel4::where("update_by",auth()->user()->id)->where("l4_stock","A")->where("l4_flag","A")->update(["create_by" => auth()->user()->id,
+                                        "l4_qty"=>$r->l4_qty,
                                         "product_mastar_id"=>$r->product_mastar_id]);
 
             return $this->sendResponse($data, "Edit Wrok item successfully");

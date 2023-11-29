@@ -6,6 +6,7 @@ use App\Http\Controllers\customer\api_controller\Label1Action;
 use App\Http\Controllers\customer\api_controller\Label2Action;
 use App\Http\Controllers\customer\api_controller\Label3Action;
 use App\Http\Controllers\customer\api_controller\Label4Action;
+use App\Http\Controllers\customer\api_controller\Label5Action;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -66,10 +67,18 @@ Route::middleware(['auth:sanctum', 'user-access:user3'])->group(function () {
         // Route::post('/list', [Label2Action::class, 'list_l1']);
     });
 });
-Route::middleware(['auth:sanctum', 'user-access:user3'])->group(function () {
+Route::middleware(['auth:sanctum', 'user-access:user4'])->group(function () {
     Route::prefix('l4')->group(function () {
         Route::post('/add', [Label4Action::class, 'add']);
         Route::post('/edit', [Label4Action::class, 'edit']);
+        // Route::post('/list', [Label2Action::class, 'list_l1']);
+    });
+});
+
+Route::middleware(['auth:sanctum', 'user-access:user5'])->group(function () {
+    Route::prefix('l5')->group(function () {
+        Route::post('/add', [Label5Action::class, 'add']);
+        Route::post('/edit', [Label5Action::class, 'edit']);
         // Route::post('/list', [Label2Action::class, 'list_l1']);
     });
 });
