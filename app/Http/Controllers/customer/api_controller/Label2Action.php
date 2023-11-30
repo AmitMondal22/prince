@@ -63,4 +63,20 @@ class Label2Action extends ResponceBaseController
         }
     }
 
+
+    function list_l2(Request $r): JsonResponse
+    {
+        try {
+            $data = TdLabel2::join("md_product as a",'a.product_id','=','td_label2.product_mastar_id')
+                            ->join("md_unit as b",'b.unit_id','=','a.unit_id')
+                            ->where("td_label2.update_by",auth()->user()->id)
+                            ->where("td_label2.l1_stock","A")->where("td_label2.l1_flag","A")
+                            ->select("td_label2.*","a.product_name","a.qty","b.*")->get();
+
+            return $this->sendResponse($data, " ");
+        } catch (\Throwable $th) {
+            return $this->sendError("exception handler error", $th, 400);
+        }
+    }
+
 }

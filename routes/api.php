@@ -48,7 +48,7 @@ Route::middleware(['auth:sanctum', 'user-access:user1'])->group(function () {
     Route::prefix('l1')->group(function () {
         Route::post('/add', [Label1Action::class, 'add']);
         Route::post('/edit', [Label1Action::class, 'edit']);
-        Route::post('/list', [Label1Action::class, 'list_l1']);
+        Route::get('/list', [Label1Action::class, 'list_l1']);
     });
 });
 Route::middleware(['auth:sanctum', 'user-access:user2'])->group(function () {

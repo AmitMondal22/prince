@@ -63,7 +63,11 @@ class Label1Action extends ResponceBaseController
     function list_l1(Request $r): JsonResponse
     {
         try {
-            $data = TdLabel1::join("md_product as a",'a.product_id','=','td_label1.product_mastar_id')->where("update_by",auth()->user()->id)->where("l1_stock","A")->where("l1_flag","A")->get();
+            $data = TdLabel1::join("md_product as a",'a.product_id','=','td_label1.product_mastar_id')
+                            ->join("md_unit as b",'b.unit_id','=','a.unit_id')
+                            ->where("td_label1.update_by",auth()->user()->id)
+                            ->where("td_label1.l1_stock","A")->where("td_label1.l1_flag","A")
+                            ->select("td_label1.*","a.product_name","a.qty","b.*")->get();
 
             return $this->sendResponse($data, " ");
         } catch (\Throwable $th) {

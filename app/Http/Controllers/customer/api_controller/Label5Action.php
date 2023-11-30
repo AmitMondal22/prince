@@ -2,13 +2,14 @@
 
 namespace App\Http\Controllers\customer\api_controller;
 
+use App\Http\Controllers\assets\ResponceBaseController;
 use App\Http\Controllers\Controller;
 use App\Models\TdLabel5;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
-class Label5Action extends Controller
+class Label5Action extends ResponceBaseController
 {
     function add(Request $r): JsonResponse
     {
