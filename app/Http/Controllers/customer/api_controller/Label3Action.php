@@ -77,4 +77,20 @@ class Label3Action extends ResponceBaseController
         }
     }
 
+
+    function list_l3(Request $r): JsonResponse
+    {
+        try {
+            $data = TdLabel3::join("md_product as a",'a.product_id','=','td_label3.product_mastar_id')
+                            ->join("md_unit as b",'b.unit_id','=','a.unit_id')
+                            ->where("td_label3.update_by",auth()->user()->id)
+                            ->where("td_label3.l3_stock","A")->where("td_label3.l3_flag","A")
+                            ->select("td_label3.*","a.product_name","a.qty","b.*")->get();
+
+            return $this->sendResponse($data, " ");
+        } catch (\Throwable $th) {
+            return $this->sendError("exception handler error", $th, 400);
+        }
+    }
+
 }

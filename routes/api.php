@@ -56,6 +56,7 @@ Route::middleware(['auth:sanctum', 'user-access:user2'])->group(function () {
     Route::prefix('l2')->group(function () {
         Route::post('/add', [Label2Action::class, 'add']);
         Route::post('/edit', [Label2Action::class, 'edit']);
+        Route::get('/list', [Label2Action::class, 'list_l2']);
         // Route::post('/list', [Label2Action::class, 'list_l1']);
     });
 });
@@ -64,6 +65,7 @@ Route::middleware(['auth:sanctum', 'user-access:user3'])->group(function () {
     Route::prefix('l3')->group(function () {
         Route::post('/add', [Label3Action::class, 'add']);
         Route::post('/edit', [Label3Action::class, 'edit']);
+        Route::get('/list', [Label3Action::class, 'list_l3']);
         // Route::post('/list', [Label2Action::class, 'list_l1']);
     });
 });
@@ -71,6 +73,7 @@ Route::middleware(['auth:sanctum', 'user-access:user4'])->group(function () {
     Route::prefix('l4')->group(function () {
         Route::post('/add', [Label4Action::class, 'add']);
         Route::post('/edit', [Label4Action::class, 'edit']);
+        Route::get('/list', [Label4Action::class, 'list_l4']);
         // Route::post('/list', [Label2Action::class, 'list_l1']);
     });
 });
@@ -79,6 +82,7 @@ Route::middleware(['auth:sanctum', 'user-access:user5'])->group(function () {
     Route::prefix('l5')->group(function () {
         Route::post('/add', [Label5Action::class, 'add']);
         Route::post('/edit', [Label5Action::class, 'edit']);
+        Route::get('/list', [Label5Action::class, 'list_l5']);
         // Route::post('/list', [Label2Action::class, 'list_l1']);
     });
 });

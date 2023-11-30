@@ -70,7 +70,7 @@ class Label2Action extends ResponceBaseController
             $data = TdLabel2::join("md_product as a",'a.product_id','=','td_label2.product_mastar_id')
                             ->join("md_unit as b",'b.unit_id','=','a.unit_id')
                             ->where("td_label2.update_by",auth()->user()->id)
-                            ->where("td_label2.l1_stock","A")->where("td_label2.l1_flag","A")
+                            ->where("td_label2.l2_stock","A")->where("td_label2.l2_flag","A")
                             ->select("td_label2.*","a.product_name","a.qty","b.*")->get();
 
             return $this->sendResponse($data, " ");

@@ -71,4 +71,20 @@ class Label4Action extends ResponceBaseController
             return $this->sendError("exception handler error", $th, 400);
         }
     }
+
+
+    function list_l4(Request $r): JsonResponse
+    {
+        try {
+            $data = TdLabel4::join("md_product as a",'a.product_id','=','td_label4.product_mastar_id')
+                            ->join("md_unit as b",'b.unit_id','=','a.unit_id')
+                            ->where("td_label4.update_by",auth()->user()->id)
+                            ->where("td_label4.l4_stock","A")->where("td_label4.l4_flag","A")
+                            ->select("td_label4.*","a.product_name","a.qty","b.*")->get();
+
+            return $this->sendResponse($data, " ");
+        } catch (\Throwable $th) {
+            return $this->sendError("exception handler error", $th, 400);
+        }
+    }
 }
