@@ -59,6 +59,7 @@ class CustomerApiAuth extends ResponceBaseController
                 $query->where('mobile', '=', $searchTerm)
                     ->orWhere('email', '=', $searchTerm);
             })->first();
+
             if (!empty($data)) {
                 if (Hash::check($r->password, $data->password)) {
 

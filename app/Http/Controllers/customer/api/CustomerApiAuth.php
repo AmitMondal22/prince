@@ -45,7 +45,6 @@ class CustomerApiAuth extends ResponceBaseController
 
     function login(Request $r): JsonResponse
     {
-
         try {
             $rules = [
                 'username' => 'required',

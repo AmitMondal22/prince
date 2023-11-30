@@ -89,8 +89,8 @@ Route::prefix('auth')->group(function () {
     POST method with the URL path '/login'. When a POST request is made to this route, it will call
     the 'login' method of the 'CustomerApiAuth' class. */
     Route::post('/login', [CustomerApiAuth::class, 'login']);
-
     Route::prefix('customer')->group(function () {
+
     });
 });
 

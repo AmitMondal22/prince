@@ -63,9 +63,9 @@ class Label1Action extends ResponceBaseController
     function list_l1(Request $r): JsonResponse
     {
         try {
-            $data = TdLabel1::join("md_product as a",'a.')->where("update_by",auth()->user()->id)->where("l1_stock","A")->where("l1_flag","A")->get();
+            $data = TdLabel1::join("md_product as a",'a.product_id','=','td_label1.product_mastar_id')->where("update_by",auth()->user()->id)->where("l1_stock","A")->where("l1_flag","A")->get();
 
-            return $this->sendResponse($data, "Edit Wrok item successfully");
+            return $this->sendResponse($data, " ");
         } catch (\Throwable $th) {
             return $this->sendError("exception handler error", $th, 400);
         }
