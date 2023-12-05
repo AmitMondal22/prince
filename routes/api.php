@@ -2,11 +2,16 @@
 
 use App\Http\Controllers\customer\api_controller\Assets;
 use App\Http\Controllers\customer\api_controller\CustomerApiAuth;
+use App\Http\Controllers\customer\api_controller\Label10Action;
 use App\Http\Controllers\customer\api_controller\Label1Action;
 use App\Http\Controllers\customer\api_controller\Label2Action;
 use App\Http\Controllers\customer\api_controller\Label3Action;
 use App\Http\Controllers\customer\api_controller\Label4Action;
 use App\Http\Controllers\customer\api_controller\Label5Action;
+use App\Http\Controllers\customer\api_controller\Label6Action;
+use App\Http\Controllers\customer\api_controller\Label7Action;
+use App\Http\Controllers\customer\api_controller\Label8Action;
+use App\Http\Controllers\customer\api_controller\Label9Action;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -86,6 +91,48 @@ Route::middleware(['auth:sanctum', 'user-access:user5'])->group(function () {
         // Route::post('/list', [Label2Action::class, 'list_l1']);
     });
 });
+
+Route::middleware(['auth:sanctum', 'user-access:user6'])->group(function () {
+    Route::prefix('l6')->group(function () {
+        Route::post('/add', [Label6Action::class, 'add']);
+        Route::post('/edit', [Label6Action::class, 'edit']);
+        Route::get('/list', [Label6Action::class, 'list_l6']);
+    });
+});
+
+Route::middleware(['auth:sanctum', 'user-access:user7'])->group(function () {
+    Route::prefix('l7')->group(function () {
+        Route::post('/add', [Label7Action::class, 'add']);
+        Route::post('/edit', [Label7Action::class, 'edit']);
+        Route::get('/list', [Label7Action::class, 'list_l7']);
+    });
+});
+
+Route::middleware(['auth:sanctum', 'user-access:user8'])->group(function () {
+    Route::prefix('l8')->group(function () {
+        Route::post('/add', [Label8Action::class, 'add']);
+        Route::post('/edit', [Label8Action::class, 'edit']);
+        Route::get('/list', [Label8Action::class, 'list_l8']);
+    });
+});
+
+Route::middleware(['auth:sanctum', 'user-access:user9'])->group(function () {
+    Route::prefix('l9')->group(function () {
+        Route::post('/add', [Label9Action::class, 'add']);
+        Route::post('/edit', [Label9Action::class, 'edit']);
+        Route::get('/list', [Label9Action::class, 'list_l9']);
+    });
+});
+
+Route::middleware(['auth:sanctum', 'user-access:user10'])->group(function () {
+    Route::prefix('l10')->group(function () {
+        Route::post('/add', [Label10Action::class, 'add']);
+        Route::post('/edit', [Label10Action::class, 'edit']);
+        Route::get('/list', [Label10Action::class, 'list_l10']);
+    });
+});
+
+
 
 Route::prefix('auth')->group(function () {
     Route::match(['get', 'post'], '/register', [CustomerApiAuth::class, 'register']);
