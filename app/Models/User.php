@@ -65,7 +65,7 @@ class User extends Authenticatable
        /* The code `return new Attribute(get: fn () =>  ["admin", "user1", "user2"][])` is
        defining a custom cast for the `type` attribute of the `User` model. */
         return new Attribute(
-            get: fn ($value) =>  ["admin", "user1" ,"user2","user3","user4","user5"][$value],
+            get: fn ($value) =>  ["admin", "user1" ,"user2","user3","user4","user5","user6","user7","user8","user9","user10"][$value],
         );
     }
 }
