@@ -55,6 +55,7 @@ class Label4Action extends ResponceBaseController
         try {
             $rules = [
                 'l4_qty' => 'required|integer',
+                'label4_id' => 'required|integer',
                 'product_mastar_id' => 'required|integer',
             ];
             $valaditor = Validator::make($r->all(), $rules);
@@ -62,7 +63,7 @@ class Label4Action extends ResponceBaseController
                 return $this->sendError("request validation error", $valaditor->errors(), 400);
             }
 
-            $data = TdLabel4::where("update_by",auth()->user()->id)->where("l4_stock","A")->where("l4_flag","A")->update(["create_by" => auth()->user()->id,
+            $data = TdLabel4::where("label4_id",$r->label4_id)->where("update_by",auth()->user()->id)->where("l4_stock","A")->where("l4_flag","A")->update(["create_by" => auth()->user()->id,
                                         "l4_qty"=>$r->l4_qty,
                                         "product_mastar_id"=>$r->product_mastar_id]);
 

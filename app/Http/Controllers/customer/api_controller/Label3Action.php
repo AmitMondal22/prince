@@ -60,6 +60,7 @@ class Label3Action extends ResponceBaseController
         try {
             $rules = [
                 'l3_qty' => 'required|integer',
+                'label3_id' => 'required|integer',
                 'product_mastar_id' => 'required|integer',
             ];
             $valaditor = Validator::make($r->all(), $rules);
@@ -67,7 +68,7 @@ class Label3Action extends ResponceBaseController
                 return $this->sendError("request validation error", $valaditor->errors(), 400);
             }
 
-            $data = TdLabel3::where("update_by",auth()->user()->id)->where("l3_stock","A")->where("l3_flag","A")->update(["create_by" => auth()->user()->id,
+            $data = TdLabel3::where("label3_id",$r->label3_id)->where("update_by",auth()->user()->id)->where("l3_stock","A")->where("l3_flag","A")->update(["create_by" => auth()->user()->id,
                                         "l3_qty"=>$r->l3_qty,
                                         "product_mastar_id"=>$r->product_mastar_id]);
 
