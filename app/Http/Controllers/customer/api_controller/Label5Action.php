@@ -22,12 +22,14 @@ class Label5Action extends ResponceBaseController
             if ($valaditor->fails()) {
                 return $this->sendError("request validation error", $valaditor->errors(), 400);
             }
-            $data = TdLabel5::create(["create_by" => auth()->user()->id,
-                                        "l5_qty"=>$r->l5_qty,
-                                        "product_mastar_id"=>$r->product_mastar_id,
-                                        "l5_stock"=>"A",
-                                        "l5_flag"=>"A",
-                                        "update_by"=>auth()->user()->id]);
+            $data = TdLabel5::create([
+                "create_by" => auth()->user()->id,
+                "l5_qty" => $r->l5_qty,
+                "product_mastar_id" => $r->product_mastar_id,
+                "l5_stock" => "A",
+                "l5_flag" => "A",
+                "update_by" => auth()->user()->id
+            ]);
             //$data2=TdLabel4::where("update_by",auth()->user()->id)->where("l2_stock","A")->where("l2_flag","A")->update(["l2_stock"=>"B","l2_flag"=>"B"]);
             return $this->sendResponse($data, "Add Label 3 successfully");
         } catch (\Throwable $th) {
@@ -49,9 +51,12 @@ class Label5Action extends ResponceBaseController
                 return $this->sendError("request validation error", $valaditor->errors(), 400);
             }
 
-            $data = TdLabel5::where("label5_id",$r->label5_id)->where("update_by",auth()->user()->id)->where("l5_stock","A")->where("l5_flag","A")->update(["create_by" => auth()->user()->id,
-                                        "l5_qty"=>$r->l5_qty,
-                                        "product_mastar_id"=>$r->product_mastar_id]);
+            $data = TdLabel5::where("label5_id", $r->label5_id)->where("update_by", auth()->user()->id)->where("l5_stock", "A")->where("l5_flag", "A")->update([
+                "create_by" => auth()->user()->id,
+                "l5_qty" => $r->l5_qty,
+                "qty" => $r->l5_qty,
+                "product_mastar_id" => $r->product_mastar_id
+            ]);
 
             return $this->sendResponse($data, "Edit Wrok item successfully");
         } catch (\Throwable $th) {
@@ -64,11 +69,11 @@ class Label5Action extends ResponceBaseController
     function list_l5(Request $r): JsonResponse
     {
         try {
-            $data = TdLabel5::join("md_product as a",'a.product_id','=','td_label5.product_mastar_id')
-                            ->join("md_unit as b",'b.unit_id','=','a.unit_id')
-                            ->where("td_label5.update_by",auth()->user()->id)
-                            ->where("td_label5.l5_stock","A")->where("td_label5.l5_flag","A")
-                            ->select("td_label5.*","a.product_name","a.qty","b.*")->get();
+            $data = TdLabel5::join("md_product as a", 'a.product_id', '=', 'td_label5.product_mastar_id')
+                ->join("md_unit as b", 'b.unit_id', '=', 'a.unit_id')
+                ->where("td_label5.update_by", auth()->user()->id)
+                ->where("td_label5.l5_stock", "A")->where("td_label5.l5_flag", "A")
+                ->select("td_label5.*", "a.product_name", "a.qty", "b.*")->get();
 
             return $this->sendResponse($data, " ");
         } catch (\Throwable $th) {

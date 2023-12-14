@@ -22,12 +22,14 @@ class Label8Action extends ResponceBaseController
             if ($valaditor->fails()) {
                 return $this->sendError("request validation error", $valaditor->errors(), 400);
             }
-            $data = TdLabel8::create(["create_by" => auth()->user()->id,
-                                        "l8_qty"=>$r->l8_qty,
-                                        "product_mastar_id"=>$r->product_mastar_id,
-                                        "l8_stock"=>"A",
-                                        "l8_flag"=>"A",
-                                        "update_by"=>auth()->user()->id]);
+            $data = TdLabel8::create([
+                "create_by" => auth()->user()->id,
+                "l8_qty" => $r->l8_qty,
+                "product_mastar_id" => $r->product_mastar_id,
+                "l8_stock" => "A",
+                "l8_flag" => "A",
+                "update_by" => auth()->user()->id
+            ]);
             //$data2=TdLabel4::where("update_by",auth()->user()->id)->where("l2_stock","A")->where("l2_flag","A")->update(["l2_stock"=>"B","l2_flag"=>"B"]);
             return $this->sendResponse($data, "Add Label 8 successfully");
         } catch (\Throwable $th) {
@@ -49,9 +51,12 @@ class Label8Action extends ResponceBaseController
                 return $this->sendError("request validation error", $valaditor->errors(), 400);
             }
 
-            $data = TdLabel8::where("label8_id",$r->label8_id)->where("update_by",auth()->user()->id)->where("l8_stock","A")->where("l8_flag","A")->update(["create_by" => auth()->user()->id,
-                                        "l8_qty"=>$r->l8_qty,
-                                        "product_mastar_id"=>$r->product_mastar_id]);
+            $data = TdLabel8::where("label8_id", $r->label8_id)->where("update_by", auth()->user()->id)->where("l8_stock", "A")->where("l8_flag", "A")->update([
+                "create_by" => auth()->user()->id,
+                "l8_qty" => $r->l8_qty,
+                "qty" => $r->l8_qty,
+                "product_mastar_id" => $r->product_mastar_id
+            ]);
 
             return $this->sendResponse($data, "Edit Wrok item successfully");
         } catch (\Throwable $th) {
@@ -64,11 +69,11 @@ class Label8Action extends ResponceBaseController
     function list_l8(Request $r): JsonResponse
     {
         try {
-            $data = TdLabel8::join("md_product as a",'a.product_id','=','td_label8.product_mastar_id')
-                            ->join("md_unit as b",'b.unit_id','=','a.unit_id')
-                            ->where("td_label8.update_by",auth()->user()->id)
-                            ->where("td_label8.l8_stock","A")->where("td_label8.l8_flag","A")
-                            ->select("td_label8.*","a.product_name","a.qty","b.*")->get();
+            $data = TdLabel8::join("md_product as a", 'a.product_id', '=', 'td_label8.product_mastar_id')
+                ->join("md_unit as b", 'b.unit_id', '=', 'a.unit_id')
+                ->where("td_label8.update_by", auth()->user()->id)
+                ->where("td_label8.l8_stock", "A")->where("td_label8.l8_flag", "A")
+                ->select("td_label8.*", "a.product_name", "a.qty", "b.*")->get();
 
             return $this->sendResponse($data, " ");
         } catch (\Throwable $th) {

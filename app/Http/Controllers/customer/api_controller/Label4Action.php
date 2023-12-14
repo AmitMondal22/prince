@@ -23,12 +23,14 @@ class Label4Action extends ResponceBaseController
             if ($valaditor->fails()) {
                 return $this->sendError("request validation error", $valaditor->errors(), 400);
             }
-            $data = TdLabel4::create(["create_by" => auth()->user()->id,
-                                        "l4_qty"=>$r->l4_qty,
-                                        "product_mastar_id"=>$r->product_mastar_id,
-                                        "l4_stock"=>"A",
-                                        "l4_flag"=>"A",
-                                        "update_by"=>auth()->user()->id]);
+            $data = TdLabel4::create([
+                "create_by" => auth()->user()->id,
+                "l4_qty" => $r->l4_qty,
+                "product_mastar_id" => $r->product_mastar_id,
+                "l4_stock" => "A",
+                "l4_flag" => "A",
+                "update_by" => auth()->user()->id
+            ]);
             //$data2=TdLabel4::where("update_by",auth()->user()->id)->where("l2_stock","A")->where("l2_flag","A")->update(["l2_stock"=>"B","l2_flag"=>"B"]);
             return $this->sendResponse($data, "Add Label 3 successfully");
         } catch (\Throwable $th) {
@@ -40,7 +42,7 @@ class Label4Action extends ResponceBaseController
     function list_l1(Request $r): JsonResponse
     {
         try {
-            $data = TdLabel2::where("update_by",auth()->user()->id)->where("l1_stock","A")->where("l1_flag","A")->get();
+            $data = TdLabel2::where("update_by", auth()->user()->id)->where("l1_stock", "A")->where("l1_flag", "A")->get();
 
             return $this->sendResponse($data, "Edit Wrok item successfully");
         } catch (\Throwable $th) {
@@ -63,9 +65,12 @@ class Label4Action extends ResponceBaseController
                 return $this->sendError("request validation error", $valaditor->errors(), 400);
             }
 
-            $data = TdLabel4::where("label4_id",$r->label4_id)->where("update_by",auth()->user()->id)->where("l4_stock","A")->where("l4_flag","A")->update(["create_by" => auth()->user()->id,
-                                        "l4_qty"=>$r->l4_qty,
-                                        "product_mastar_id"=>$r->product_mastar_id]);
+            $data = TdLabel4::where("label4_id", $r->label4_id)->where("update_by", auth()->user()->id)->where("l4_stock", "A")->where("l4_flag", "A")->update([
+                "create_by" => auth()->user()->id,
+                "l4_qty" => $r->l4_qty,
+                "qty" => $r->l4_qty,
+                "product_mastar_id" => $r->product_mastar_id
+            ]);
 
             return $this->sendResponse($data, "Edit Wrok item successfully");
         } catch (\Throwable $th) {
@@ -77,11 +82,11 @@ class Label4Action extends ResponceBaseController
     function list_l4(Request $r): JsonResponse
     {
         try {
-            $data = TdLabel4::join("md_product as a",'a.product_id','=','td_label4.product_mastar_id')
-                            ->join("md_unit as b",'b.unit_id','=','a.unit_id')
-                            ->where("td_label4.update_by",auth()->user()->id)
-                            ->where("td_label4.l4_stock","A")->where("td_label4.l4_flag","A")
-                            ->select("td_label4.*","a.product_name","a.qty","b.*")->get();
+            $data = TdLabel4::join("md_product as a", 'a.product_id', '=', 'td_label4.product_mastar_id')
+                ->join("md_unit as b", 'b.unit_id', '=', 'a.unit_id')
+                ->where("td_label4.update_by", auth()->user()->id)
+                ->where("td_label4.l4_stock", "A")->where("td_label4.l4_flag", "A")
+                ->select("td_label4.*", "a.product_name", "a.qty", "b.*")->get();
 
             return $this->sendResponse($data, " ");
         } catch (\Throwable $th) {

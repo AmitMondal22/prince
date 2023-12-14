@@ -22,12 +22,14 @@ class Label9Action extends  ResponceBaseController
             if ($valaditor->fails()) {
                 return $this->sendError("request validation error", $valaditor->errors(), 400);
             }
-            $data = TdLabel9::create(["create_by" => auth()->user()->id,
-                                        "l9_qty"=>$r->l9_qty,
-                                        "product_mastar_id"=>$r->product_mastar_id,
-                                        "l9_stock"=>"A",
-                                        "l9_flag"=>"A",
-                                        "update_by"=>auth()->user()->id]);
+            $data = TdLabel9::create([
+                "create_by" => auth()->user()->id,
+                "l9_qty" => $r->l9_qty,
+                "product_mastar_id" => $r->product_mastar_id,
+                "l9_stock" => "A",
+                "l9_flag" => "A",
+                "update_by" => auth()->user()->id
+            ]);
             //$data2=TdLabel4::where("update_by",auth()->user()->id)->where("l2_stock","A")->where("l2_flag","A")->update(["l2_stock"=>"B","l2_flag"=>"B"]);
             return $this->sendResponse($data, "Add Label 9 successfully");
         } catch (\Throwable $th) {
@@ -49,9 +51,12 @@ class Label9Action extends  ResponceBaseController
                 return $this->sendError("request validation error", $valaditor->errors(), 400);
             }
 
-            $data = TdLabel9::where("label9_id",$r->label9_id)->where("update_by",auth()->user()->id)->where("l9_stock","A")->where("l9_flag","A")->update(["create_by" => auth()->user()->id,
-                                        "l9_qty"=>$r->l9_qty,
-                                        "product_mastar_id"=>$r->product_mastar_id]);
+            $data = TdLabel9::where("label9_id", $r->label9_id)->where("update_by", auth()->user()->id)->where("l9_stock", "A")->where("l9_flag", "A")->update([
+                "create_by" => auth()->user()->id,
+                "l9_qty" => $r->l9_qty,
+                "qty" => $r->l9_qty,
+                "product_mastar_id" => $r->product_mastar_id
+            ]);
 
             return $this->sendResponse($data, "Edit Wrok item successfully");
         } catch (\Throwable $th) {
@@ -64,11 +69,11 @@ class Label9Action extends  ResponceBaseController
     function list_l9(Request $r): JsonResponse
     {
         try {
-            $data = TdLabel9::join("md_product as a",'a.product_id','=','td_label9.product_mastar_id')
-                            ->join("md_unit as b",'b.unit_id','=','a.unit_id')
-                            ->where("td_label9.update_by",auth()->user()->id)
-                            ->where("td_label9.l9_stock","A")->where("td_label9.l9_flag","A")
-                            ->select("td_label9.*","a.product_name","a.qty","b.*")->get();
+            $data = TdLabel9::join("md_product as a", 'a.product_id', '=', 'td_label9.product_mastar_id')
+                ->join("md_unit as b", 'b.unit_id', '=', 'a.unit_id')
+                ->where("td_label9.update_by", auth()->user()->id)
+                ->where("td_label9.l9_stock", "A")->where("td_label9.l9_flag", "A")
+                ->select("td_label9.*", "a.product_name", "a.qty", "b.*")->get();
 
             return $this->sendResponse($data, " ");
         } catch (\Throwable $th) {

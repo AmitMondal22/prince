@@ -26,12 +26,14 @@ class Label2Action extends ResponceBaseController
 
 
 
-            $data = TdLabel2::create(["create_by" => auth()->user()->id,
-                                        "l2_qty"=>$r->l2_qty,
-                                        "product_mastar_id"=>$r->product_mastar_id,
-                                        "l2_stock"=>"A",
-                                        "l2_flag"=>"A",
-                                        "update_by"=>auth()->user()->id]);
+            $data = TdLabel2::create([
+                "create_by" => auth()->user()->id,
+                "l2_qty" => $r->l2_qty,
+                "product_mastar_id" => $r->product_mastar_id,
+                "l2_stock" => "A",
+                "l2_flag" => "A",
+                "update_by" => auth()->user()->id
+            ]);
 
             return $this->sendResponse($data, "Add Label 2 successfully");
         } catch (\Throwable $th) {
@@ -54,9 +56,12 @@ class Label2Action extends ResponceBaseController
                 return $this->sendError("request validation error", $valaditor->errors(), 400);
             }
 
-            $data = TdLabel2::where("label2_id",$r->label2_id)->where("update_by",auth()->user()->id)->where("l2_stock","A")->where("l2_flag","A")->update(["create_by" => auth()->user()->id,
-                                        "l2_qty"=>$r->l2_qty,
-                                        "product_mastar_id"=>$r->product_mastar_id]);
+            $data = TdLabel2::where("label2_id", $r->label2_id)->where("update_by", auth()->user()->id)->where("l2_stock", "A")->where("l2_flag", "A")->update([
+                "create_by" => auth()->user()->id,
+                "l2_qty" => $r->l2_qty,
+                "qty" => $r->l2_qty,
+                "product_mastar_id" => $r->product_mastar_id
+            ]);
 
             return $this->sendResponse($data, "Edit Wrok item successfully");
         } catch (\Throwable $th) {
@@ -68,16 +73,15 @@ class Label2Action extends ResponceBaseController
     function list_l2(Request $r): JsonResponse
     {
         try {
-            $data = TdLabel2::join("md_product as a",'a.product_id','=','td_label2.product_mastar_id')
-                            ->join("md_unit as b",'b.unit_id','=','a.unit_id')
-                            ->where("td_label2.update_by",auth()->user()->id)
-                            ->where("td_label2.l2_stock","A")->where("td_label2.l2_flag","A")
-                            ->select("td_label2.*","a.product_name","a.qty","b.*")->get();
+            $data = TdLabel2::join("md_product as a", 'a.product_id', '=', 'td_label2.product_mastar_id')
+                ->join("md_unit as b", 'b.unit_id', '=', 'a.unit_id')
+                ->where("td_label2.update_by", auth()->user()->id)
+                ->where("td_label2.l2_stock", "A")->where("td_label2.l2_flag", "A")
+                ->select("td_label2.*", "a.product_name", "a.qty", "b.*")->get();
 
             return $this->sendResponse($data, " ");
         } catch (\Throwable $th) {
             return $this->sendError("exception handler error", $th, 400);
         }
     }
-
 }
