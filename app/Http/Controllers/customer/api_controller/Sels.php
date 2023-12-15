@@ -20,6 +20,7 @@ class Sels extends ResponceBaseController
                 "qty" => "required|integer",
                 "mrp" => "required|integer",
                 "discount" => "required|integer",
+                
                 "cgst" => "required|integer",
                 "sgst" => "required|integer",
                 "amount" => "required|integer",
