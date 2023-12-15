@@ -5,12 +5,13 @@ namespace App\Http\Controllers\customer\api_controller;
 use App\Http\Controllers\assets\ResponceBaseController;
 use App\Http\Controllers\Controller;
 use App\Models\Md_customer;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
 class Customer extends ResponceBaseController
 {
-    function add(Request $r)
+    function add(Request $r): JsonResponse
     {
         try {
             $rules = [
@@ -44,6 +45,16 @@ class Customer extends ResponceBaseController
 
 
             return $this->sendResponse($data, "Add customer successfully");
+        } catch (\Throwable $th) {
+            return $this->sendError("exception handler error", $th, 400);
+        }
+    }
+
+    function listCustomer(): JsonResponse
+    {
+        try {
+            $data = Md_customer::get();
+            return $this->sendResponse($data, "List customer successfully");
         } catch (\Throwable $th) {
             return $this->sendError("exception handler error", $th, 400);
         }

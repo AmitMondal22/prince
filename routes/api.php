@@ -53,6 +53,7 @@ Route::middleware(['auth:sanctum'])->group(function () {
 Route::middleware(['auth:sanctum', 'user-access:admin'])->group(function () {
     Route::prefix('admin')->group(function () {
         Route::post('/customer/add', [Customer::class, 'add']);
+        Route::get('/customer/list', [Customer::class, 'listCustomer']);
     });
 });
 
