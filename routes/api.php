@@ -66,6 +66,14 @@ Route::middleware(['auth:sanctum', 'user-access:user2'])->group(function () {
     });
 });
 
+
+Route::middleware(['auth:sanctum', 'user-access:admin'])->group(function () {
+
+Route::prefix('admin')->group(function () {
+    Route::post('/add', [CustomerApiAuth::class, 'add']);
+});
+});
+
 Route::middleware(['auth:sanctum', 'user-access:user3'])->group(function () {
     Route::prefix('l3')->group(function () {
         Route::post('/add', [Label3Action::class, 'add']);
@@ -141,7 +149,6 @@ Route::prefix('auth')->group(function () {
     the 'login' method of the 'CustomerApiAuth' class. */
     Route::post('/login', [CustomerApiAuth::class, 'login']);
     Route::prefix('customer')->group(function () {
-
     });
 });
 
