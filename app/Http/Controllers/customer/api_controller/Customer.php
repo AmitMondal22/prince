@@ -25,22 +25,22 @@ class Customer extends ResponceBaseController
             if ($valaditor->fails()) {
                 return $this->sendError("request validation error", $valaditor->errors(), 400);
             }
-            if($r->company_name){
+            if ($r->company_name) {
                 $data = Md_customer::create([
-                "customer_name" => $r->customer_name,
-                "company_name"=>$r->company_name,
-                "mobile_no" => $r->mobile_no,
-                "address" => $r->address,
-            ]);
-            }else{
+                    "customer_name" => $r->customer_name,
+                    "company_name" => $r->company_name,
+                    "mobile_no" => $r->mobile_no,
+                    "address" => $r->address,
+                ]);
+            } else {
                 $data = Md_customer::create([
-                "customer_name" => $r->customer_name,
-                "company_name"=>$r->customer_name,
-                "mobile_no" => $r->mobile_no,
-                "address" => $r->address,
-                //"create_by" => auth()->user()->id,
-                //"update_by" => auth()->user()->id
-            ]);
+                    "customer_name" => $r->customer_name,
+                    "company_name" => $r->customer_name,
+                    "mobile_no" => $r->mobile_no,
+                    "address" => $r->address,
+                    //"create_by" => auth()->user()->id,
+                    //"update_by" => auth()->user()->id
+                ]);
             }
 
 
@@ -74,23 +74,24 @@ class Customer extends ResponceBaseController
             if ($valaditor->fails()) {
                 return $this->sendError("request validation error", $valaditor->errors(), 400);
             }
-            if($r->company_name){
-                $data = Md_customer::where("customer_id",$r->customer_id)->update([
-                "customer_name" => $r->customer_name,
-                "company_name"=>$r->company_name,
-                "mobile_no" => $r->mobile_no,
-                "address" => $r->address,
-            ]);
-            }else{
-                $data = Md_customer::where("customer_id",$r->customer_id)->update([
-                "customer_name" => $r->customer_name,
-                "company_name"=>$r->customer_name,
-                "mobile_no" => $r->mobile_no,
-                "address" => $r->address,
-                //"create_by" => auth()->user()->id,
-                //"update_by" => auth()->user()->id
-            ]);
+            if ($r->company_name) {
+                $data = Md_customer::where("customer_id", $r->customer_id)->update([
+                    "customer_name" => $r->customer_name,
+                    "company_name" => $r->company_name,
+                    "mobile_no" => $r->mobile_no,
+                    "address" => $r->address,
+                ]);
+            } else {
+                $data = Md_customer::where("customer_id", $r->customer_id)->update([
+                    "customer_name" => $r->customer_name,
+                    "company_name" => $r->customer_name,
+                    "mobile_no" => $r->mobile_no,
+                    "address" => $r->address,
+                    //"create_by" => auth()->user()->id,
+                    //"update_by" => auth()->user()->id
+                ]);
             }
+            return $this->sendResponse($data, "Edit customer successfully");
         } catch (\Throwable $th) {
             return $this->sendError("exception handler error", $th, 400);
         }
