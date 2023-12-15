@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\customer\api_controller\Assets;
+use App\Http\Controllers\customer\api_controller\Customer;
 use App\Http\Controllers\customer\api_controller\CustomerApiAuth;
 use App\Http\Controllers\customer\api_controller\Label10Action;
 use App\Http\Controllers\customer\api_controller\Label1Action;
@@ -49,6 +50,13 @@ Route::middleware(['auth:sanctum'])->group(function () {
     });
 });
 
+Route::middleware(['auth:sanctum', 'user-access:admin'])->group(function () {
+    Route::prefix('admin')->group(function () {
+        Route::post('/add', [Customer::class, 'add']);
+    });
+});
+
+
 Route::middleware(['auth:sanctum', 'user-access:user1'])->group(function () {
     Route::prefix('l1')->group(function () {
         Route::post('/add', [Label1Action::class, 'add']);
@@ -67,12 +75,7 @@ Route::middleware(['auth:sanctum', 'user-access:user2'])->group(function () {
 });
 
 
-Route::middleware(['auth:sanctum', 'user-access:admin'])->group(function () {
 
-Route::prefix('admin')->group(function () {
-    Route::post('/add', [CustomerApiAuth::class, 'add']);
-});
-});
 
 Route::middleware(['auth:sanctum', 'user-access:user3'])->group(function () {
     Route::prefix('l3')->group(function () {
