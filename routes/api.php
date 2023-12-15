@@ -13,6 +13,7 @@ use App\Http\Controllers\customer\api_controller\Label6Action;
 use App\Http\Controllers\customer\api_controller\Label7Action;
 use App\Http\Controllers\customer\api_controller\Label8Action;
 use App\Http\Controllers\customer\api_controller\Label9Action;
+use App\Http\Controllers\customer\api_controller\Sels;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -55,6 +56,7 @@ Route::middleware(['auth:sanctum', 'user-access:admin'])->group(function () {
         Route::post('/customer/add', [Customer::class, 'add']);
         Route::get('/customer/list', [Customer::class, 'listCustomer']);
         Route::post('/customer/edit', [Customer::class, 'editCustomer']);
+        Route::post('/sels/add', [Sels::class, 'addSels']);
     });
 });
 
