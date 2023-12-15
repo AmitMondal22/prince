@@ -11,5 +11,5 @@ class Md_customer extends Model
 
     protected $table = 'md_customer';
     protected $primaryKey = 'customer_id';
-    protected $fillable = ["customer_name", "mobile_no", "address"];
+    protected $fillable = ["customer_name","company_name", "mobile_no", "address"];
 }

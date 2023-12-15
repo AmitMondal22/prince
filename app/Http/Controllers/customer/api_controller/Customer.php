@@ -15,8 +15,10 @@ class Customer extends ResponceBaseController
         try {
             $rules = [
                 'customer_name' => 'required|string',
+                'company_name' => 'required|string',
                 'mobile_no' => 'required|integer',
                 'address' => 'required|string',
+
             ];
             $valaditor = Validator::make($r->all(), $rules);
             if ($valaditor->fails()) {
@@ -25,10 +27,11 @@ class Customer extends ResponceBaseController
 
             $data = Md_customer::create([
                 "customer_name" => $r->customer_name,
+                "company_name"=>$r->company_name,
                 "mobile_no" => $r->mobile_no,
                 "address" => $r->address,
-                "create_by" => auth()->user()->id,
-                "update_by" => auth()->user()->id
+                //"create_by" => auth()->user()->id,
+                //"update_by" => auth()->user()->id
             ]);
 
             return $this->sendResponse($data, "Add customer successfully");
