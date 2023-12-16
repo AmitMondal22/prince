@@ -20,6 +20,7 @@ class Sels extends ResponceBaseController
                 "data" => 'required',
                 "total_bill_amt"=>'required|integer',
                 "customer_id"=>'required|integer',
+                "paid_status"=>'required',
                 /* "product_id" => "required|integer",
                 "qty" => "required|integer",
                 "mrp" => "required|integer",
