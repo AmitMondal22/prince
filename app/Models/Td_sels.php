@@ -11,5 +11,5 @@ class Td_sels extends Model
 
     protected $table = 'td_sels';
     protected $primaryKey = 'sels_id';
-    protected $fillable = ["customer_id", "mrp", "discount", "cgst", "sgst", "amount", "qty", "hsncode", "product_id", "billint_id", "create_by", "update_by"];
+    protected $fillable = ["customer_id", "mrp", "discount", "cgst", "sgst", "amount", "qty", "hsncode", "payment_flag", "product_id", "billint_id", "create_by", "update_by"];
 }
