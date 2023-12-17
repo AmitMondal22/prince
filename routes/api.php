@@ -64,6 +64,19 @@ Route::middleware(['auth:sanctum', 'user-access:admin'])->group(function () {
         Route::post('/stock/add', [Stock::class, 'addStock']);
         Route::post('/stock/edit', [Stock::class, 'editStock']);
         Route::get('/stock/list', [Stock::class, 'listStock']);
+
+        Route::post('/emplyee/add', [Assets::class, 'addEmplyee']);
+        Route::post('/emplyee/edit', [Assets::class, 'editEmplyee']);
+        Route::get('/emplyee/list', [Assets::class, 'listEmployees']);
+
+        Route::post('/shift/add', [Assets::class, 'addShift']);
+        Route::post('/shift/edit', [Assets::class, 'editShift']);
+        Route::get('/shift/list', [Assets::class, 'listShift']);
+
+        Route::post('/emplyee_inout/add', [Assets::class, 'addInOut']);
+        Route::post('/emplyee_inout/edit', [Assets::class, 'editInOut']);
+        Route::get('/emplyee_inout/list', [Assets::class, 'listInOut']);
+
     });
 });
 
