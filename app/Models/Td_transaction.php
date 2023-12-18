@@ -10,5 +10,5 @@ class Td_transaction extends Model
     use HasFactory;
     protected $table = 'td_transaction';
     protected $primaryKey = 'transaction_id';
-    protected $fillable = [ "billing_id", "payment_flag", "amount", "customer_id", "transaction_date", "created_by", "updated_by"];
+    protected $fillable = [ "billint_id", "payment_flag", "amount", "customer_id", "transaction_date", "created_by", "updated_by"];
 }

@@ -39,7 +39,7 @@ class Sels extends ResponceBaseController
 
 
             $databar = Td_sels::latest()->first();
-            $bill_id = $databar ? $databar->billint_id : 0;
+            $bill_id = $databar ? $databar->billing_id : 0;
 
             $pymentStatus = ($r->paid_status == "Paid"||$r->paid_status == "paid"||$r->paid_status == "p"||$r->paid_status == "P") ? 'P' : 'D';
             foreach ($r->data as $billdata) {
@@ -54,7 +54,7 @@ class Sels extends ResponceBaseController
                     "hsncode" => $billdata["hsncode"],
                     "payment_flag"=>$pymentStatus,
                     "product_id" => $billdata["product_id"],
-                    "billint_id" => $bill_id + 1,
+                    "billing_id" => $bill_id + 1,
                     "create_by" => auth()->user()->id,
                     "update_by" => auth()->user()->id
                 ]);
@@ -63,7 +63,7 @@ class Sels extends ResponceBaseController
             Td_transaction::create([
                 "customer_id" => $r->customer_id,
                 "amount" => $r->total_bill_amt,
-                "billint_id" => $bill_id + 1,
+                "billing_id" => $bill_id + 1,
                 "payment_flag"=>$pymentStatus,
                 "transaction_date"=>date("Y-m-d H:i:s"),
                 "created_by" => auth()->user()->id,
