@@ -74,7 +74,6 @@ class Label10Action extends  ResponceBaseController
                 ->where("td_label10.update_by", auth()->user()->id)
                 ->where("td_label10.l10_stock", "A")->where("td_label10.l10_flag", "A")
                 ->select("td_label10.*", "a.product_name", "a.qty", "b.*")->get();
-
             return $this->sendResponse($data, " ");
         } catch (\Throwable $th) {
             return $this->sendError("exception handler error", $th, 400);

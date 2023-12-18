@@ -66,8 +66,8 @@ class Sels extends ResponceBaseController
                 "billint_id" => $bill_id + 1,
                 "payment_flag"=>$pymentStatus,
                 "transaction_date"=>date("Y-m-d H:i:s"),
-                "create_by" => auth()->user()->id,
-                "update_by" => auth()->user()->id
+                "created_by" => auth()->user()->id,
+                "updated_by" => auth()->user()->id
             ]);
             return $this->sendResponse($data, "Add sels successfully");
         } catch (\Throwable $th) {
