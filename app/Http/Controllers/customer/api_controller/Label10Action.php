@@ -54,7 +54,7 @@ class Label10Action extends  ResponceBaseController
             $data = TdLabel10::where("label10_id", $r->label10_id)->where("update_by", auth()->user()->id)->where("l10_stock", "A")->where("l10_flag", "A")->update([
                 "create_by" => auth()->user()->id,
                 "l10_qty" => $r->l10_qty,
-                "qty" => $r->l10_qty,
+                //"qty" => $r->l10_qty,
                 "product_mastar_id" => $r->product_mastar_id
             ]);
 

@@ -68,7 +68,7 @@ class Label4Action extends ResponceBaseController
             $data = TdLabel4::where("label4_id", $r->label4_id)->where("update_by", auth()->user()->id)->where("l4_stock", "A")->where("l4_flag", "A")->update([
                 "create_by" => auth()->user()->id,
                 "l4_qty" => $r->l4_qty,
-                "qty" => $r->l4_qty,
+               // "qty" => $r->l4_qty,
                 "product_mastar_id" => $r->product_mastar_id
             ]);
 

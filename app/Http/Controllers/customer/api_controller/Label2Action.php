@@ -59,7 +59,7 @@ class Label2Action extends ResponceBaseController
             $data = TdLabel2::where("label2_id", $r->label2_id)->where("update_by", auth()->user()->id)->where("l2_stock", "A")->where("l2_flag", "A")->update([
                 "create_by" => auth()->user()->id,
                 "l2_qty" => $r->l2_qty,
-                "qty" => $r->l2_qty,
+                //"qty" => $r->l2_qty,
                 "product_mastar_id" => $r->product_mastar_id
             ]);
 

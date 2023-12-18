@@ -54,7 +54,7 @@ class Label6Action extends ResponceBaseController
             $data = TdLabel6::where("label6_id", $r->label6_id)->where("update_by", auth()->user()->id)->where("l6_stock", "A")->where("l6_flag", "A")->update([
                 "create_by" => auth()->user()->id,
                 "l6_qty" => $r->l6_qty,
-                "qty" => $r->l6_qty,
+                //"qty" => $r->l6_qty,
                 "product_mastar_id" => $r->product_mastar_id
             ]);
 

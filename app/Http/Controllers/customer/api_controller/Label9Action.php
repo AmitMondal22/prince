@@ -54,7 +54,7 @@ class Label9Action extends  ResponceBaseController
             $data = TdLabel9::where("label9_id", $r->label9_id)->where("update_by", auth()->user()->id)->where("l9_stock", "A")->where("l9_flag", "A")->update([
                 "create_by" => auth()->user()->id,
                 "l9_qty" => $r->l9_qty,
-                "qty" => $r->l9_qty,
+                //"qty" => $r->l9_qty,
                 "product_mastar_id" => $r->product_mastar_id
             ]);
 

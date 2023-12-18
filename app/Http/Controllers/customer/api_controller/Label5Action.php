@@ -54,7 +54,7 @@ class Label5Action extends ResponceBaseController
             $data = TdLabel5::where("label5_id", $r->label5_id)->where("update_by", auth()->user()->id)->where("l5_stock", "A")->where("l5_flag", "A")->update([
                 "create_by" => auth()->user()->id,
                 "l5_qty" => $r->l5_qty,
-                "qty" => $r->l5_qty,
+                //"qty" => $r->l5_qty,
                 "product_mastar_id" => $r->product_mastar_id
             ]);
 
