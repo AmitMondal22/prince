@@ -59,7 +59,8 @@ Route::middleware(['auth:sanctum', 'user-access:admin'])->group(function () {
         Route::post('/customer/edit', [Customer::class, 'editCustomer']);
 
         Route::post('/sels/add', [Sels::class, 'addSels']);
-        Route::get('/sels/list/{id}', [Sels::class, 'listSels']);
+        Route::get('/sels/list/{id}', [Sels::class, 'listSels_bill']);
+        Route::get('/sels/list/', [Sels::class, 'listSels']);
 
         Route::post('/stock/add', [Stock::class, 'addStock']);
         Route::post('/stock/edit', [Stock::class, 'editStock']);

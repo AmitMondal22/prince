@@ -75,7 +75,31 @@ class Sels extends ResponceBaseController
         }
     }
 
-    function listSels($id): JsonResponse
+    function listSels(): JsonResponse
+    {
+        try {
+            $result = DB::table('td_sels')
+            ->join('md_customer', 'td_sels.customer_id', '=', 'md_customer.customer_id')
+            ->join('md_product', 'td_sels.product_id', '=', 'md_product.product_id')
+            ->select(
+                'td_sels.*',
+                'md_customer.customer_name',
+                'md_customer.company_name',
+                'md_customer.mobile_no',
+                'md_customer.address',
+                'md_product.product_name',
+                'md_product.unit_id',
+                'md_product.user_type',
+                'md_product.qty as product_qty'
+            )
+            ->get();
+            return $this->sendResponse($result, "List sels successfully");
+        } catch (\Throwable $th) {
+            return $this->sendError("exception handler error", $th, 400);
+        }
+    }
+
+    function listSels_bill($id): JsonResponse
     {
         try {
             $result = DB::table('td_sels')
