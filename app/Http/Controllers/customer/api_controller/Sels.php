@@ -75,12 +75,13 @@ class Sels extends ResponceBaseController
         }
     }
 
-    function listSels(): JsonResponse
+    function listSels($id): JsonResponse
     {
         try {
             $result = DB::table('td_sels')
             ->join('md_customer', 'td_sels.customer_id', '=', 'md_customer.customer_id')
             ->join('md_product', 'td_sels.product_id', '=', 'md_product.product_id')
+            ->where('td_sels.billing_id', '=', $id)
             ->select(
                 'td_sels.*',
                 'md_customer.customer_name',
