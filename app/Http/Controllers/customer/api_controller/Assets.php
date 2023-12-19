@@ -248,7 +248,7 @@ class Assets extends ResponceBaseController
                 "employee_type"=>"required",
                 "work_time"=>"required",
                 "work_rate"=>"required",
-                "overtime_typpe"=>"required",
+                "overtime_type"=>"required",
                 "overtime_rate"=>"required"
                 ];
                 $valaditor = Validator::make($r->all(), $rules);
@@ -259,7 +259,7 @@ class Assets extends ResponceBaseController
                     "employee_type"=>$r->employee_type,
                     "work_time"=>$r->work_time,
                     "work_rate"=>$r->work_rate,
-                    "overtime_typpe"=>$r->overtime_typpe,
+                    "overtime_type"=>$r->overtime_type,
                     "overtime_rate"=>$r->overtime_rate,
                     "created_by"=>auth()->user()->id,
                     "updated_by"=>auth()->user()->id
@@ -278,7 +278,7 @@ class Assets extends ResponceBaseController
                 "employee_type"=>"required",
                 "work_time"=>"required",
                 "work_rate"=>"required",
-                "overtime_typpe"=>"required",
+                "overtime_type"=>"required",
                 "overtime_rate"=>"required",
                 "shift_id"=>"required|integer"
                 ];
@@ -290,7 +290,7 @@ class Assets extends ResponceBaseController
                     "employee_type"=>$r->employee_type,
                     "work_time"=>$r->work_time,
                     "work_rate"=>$r->work_rate,
-                    "overtime_typpe"=>$r->overtime_typpe,
+                    "overtime_type"=>$r->overtime_type,
                     "overtime_rate"=>$r->overtime_rate,
                     "updated_by"=>auth()->user()->id
                 ]);
