@@ -11,5 +11,5 @@ class Md_shift extends Model
 
     protected $table = 'md_shift';
     protected $primaryKey = 'shift_id';
-    protected $fillable = ["employee_type", "work_time", "work_rate", "overtime_typpe", "overtime_rate", "created_by", "updated_by"];
+    protected $fillable = ["employee_type", "work_time", "work_rate", "overtime_type", "overtime_rate", "created_by", "updated_by"];
 }
