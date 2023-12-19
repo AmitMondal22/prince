@@ -212,7 +212,7 @@ class Assets extends ResponceBaseController
                 "employee_name" => "required|string",
                 "employee_mobile" => "required|string",
                 "employee_address" => "required|string",
-                "emplyee_id" => "required|integer"
+                "emplyee_id" => "required"
             ];
             $valaditor = Validator::make($r->all(), $rules);
             if ($valaditor->fails()) {
