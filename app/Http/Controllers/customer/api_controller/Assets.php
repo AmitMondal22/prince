@@ -315,8 +315,8 @@ class Assets extends ResponceBaseController
     {
         try{
             $rules = [
-                "employee_id"=>"required|integer",
-                "shift_id"=>"required|integer",
+                "employee_id"=>"required",
+                "shift_id"=>"required",
                 "in_time"=>"required",
                 "out_time"=>"required",
                 "date"=>"required",
