@@ -212,13 +212,13 @@ class Assets extends ResponceBaseController
                 "employee_name" => "required|string",
                 "employee_mobile" => "required|string",
                 "employee_address" => "required|string",
-                "emplyee_id" => "required"
+                "employee_id" => "required|string"
             ];
             $valaditor = Validator::make($r->all(), $rules);
             if ($valaditor->fails()) {
                 return $this->sendError("request validation error", $valaditor->errors(), 400);
             }
-            $data = Md_emplyee::where("employee_id", $r->emplyee_id)->update([
+            $data = Md_emplyee::where("employee_id", $r->employee_id)->update([
                 "employee_type" => $r->employee_type,
                 "employee_name" => $r->employee_name,
                 "employee_mobile" => $r->employee_mobile,
