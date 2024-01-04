@@ -145,18 +145,18 @@ class Assets extends ResponceBaseController
         }
     }
 
-    function list_product_mastar()
+    function list_product_mastar(): JsonResponse
     {
-       // try {
-            return $this->getUserType(auth()->user()->type);
-            //$data = MdProduct::join("md_unit as a", "a.unit_id", "=", "md_product.unit_id")
+        try {
+            $user_type=auth()->user()->type;
+            $data = MdProduct::join("md_unit as a", "a.unit_id", "=", "md_product.unit_id")
                 //->join("users as b","b.id","=","md_product.")
-              //  ->where('md_product.user_type',$this->getUserType($user_type))
-               // ->select("md_product.*", "a.unit_name", "a.unit_size")->get();
-          //  return $this->sendResponse($data, "Unit List");
-       // } catch (\Throwable $th) {
-         //   return $this->sendError("exception handler error", $th, 400);
-        //}
+                ->where('md_product.user_type',$this->getUserType($user_type))
+                ->select("md_product.*", "a.unit_name", "a.unit_size")->get();
+            return $this->sendResponse($data, "Unit List");
+        } catch (\Throwable $th) {
+            return $this->sendError("exception handler error", $th, 400);
+        }
     }
 
 
