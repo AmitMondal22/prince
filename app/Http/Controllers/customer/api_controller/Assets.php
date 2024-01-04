@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Md_emplyee;
 use App\Models\Md_shift;
 use App\Models\MdProduct;
+use App\Models\MD_MasterProduct;
 use App\Models\MdUnit;
 use App\Models\Td_InOutTime;
 use Illuminate\Http\JsonResponse;
@@ -376,6 +377,26 @@ class Assets extends ResponceBaseController
             return $this->sendResponse($data, "List In Out successfully");
         }catch(\Exception $e){
             return $this->sendError("exception handler error", $e, 400);
+        }
+    }
+
+    function add_master_product(Request $r): JsonResponse
+    {
+        try {
+            $rules = [
+                'product_name' => 'required|string'
+            ];
+            $valaditor = Validator::make($r->all(), $rules);
+            if ($valaditor->fails()) {
+                return $this->sendError("request validation error", $valaditor->errors(), 400);
+            }
+
+            $data = MD_MasterProduct::create([
+                'product_name' => $r->product_name
+            ]);
+            return $this->sendResponse($data, "new product add successfully");
+        } catch (\Throwable $th) {
+            return $this->sendError("exception handler error", $th, 400);
         }
     }
 }

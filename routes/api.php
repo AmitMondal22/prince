@@ -78,6 +78,12 @@ Route::middleware(['auth:sanctum', 'user-access:admin'])->group(function () {
         Route::post('/emplyee_inout/edit', [Assets::class, 'editInOut']);
         Route::get('/emplyee_inout/list', [Assets::class, 'listInOut']);
 
+
+        Route::post('/add_master_product/add', [Assets::class, 'add_master_product']);
+       // Route::post('/add_master_product/edit', [Assets::class, 'editInOut']);
+       // Route::get('/add_master_product/list', [Assets::class, 'listInOut']);
+
+
     });
 });
 
