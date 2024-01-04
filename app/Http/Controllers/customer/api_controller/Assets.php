@@ -148,7 +148,7 @@ class Assets extends ResponceBaseController
     function list_product_mastar()
     {
         try {
-            return $user_type=auth()->user()->type;
+            return $this->getUserType($user_type=auth()->user()->type);
             $data = MdProduct::join("md_unit as a", "a.unit_id", "=", "md_product.unit_id")
                 //->join("users as b","b.id","=","md_product.")
                 ->where('md_product.user_type',$this->getUserType($user_type))
