@@ -148,8 +148,10 @@ class Assets extends ResponceBaseController
     function list_product_mastar(): JsonResponse
     {
         try {
+            $user_type=auth()->user()->type;
             $data = MdProduct::join("md_unit as a", "a.unit_id", "=", "md_product.unit_id")
                 //->join("users as b","b.id","=","md_product.")
+                ->where('md_product.user_type',$this->getUserType($user_type))
                 ->select("md_product.*", "a.unit_name", "a.unit_size")->get();
             return $this->sendResponse($data, "Unit List");
         } catch (\Throwable $th) {
@@ -399,4 +401,38 @@ class Assets extends ResponceBaseController
             return $this->sendError("exception handler error", $th, 400);
         }
     }
+
+
+    function edit_master_product(Request $r):JsonResponse
+    {
+        try{
+            $rules = [
+                "product_name"=>"required",
+                "master_product_id"=>"required|integer"
+                ];
+                $valaditor = Validator::make($r->all(), $rules);
+                if ($valaditor->fails()) {
+                    return $this->sendError("request validation error", $valaditor->errors(), 400);
+                }
+                $data = MD_MasterProduct::where("id_master_product",$r->master_product_id)->update([
+                    'product_name' => $r->product_name
+                ]);
+                return $this->sendResponse($data, "Edit master product successfully");
+        }catch(\Exception $e){
+            return $this->sendError("exception handler error", $e, 400);
+        }
+    }
+
+
+
+    function list_master_product(Request $r):JsonResponse
+    {
+        try{
+                $data = MD_MasterProduct::all();
+                return $this->sendResponse($data, "List master product successfully");
+        }catch(\Exception $e){
+            return $this->sendError("exception handler error", $e, 400);
+        }
+    }
+
 }
