@@ -11,5 +11,15 @@ class TdLabel1 extends Model
 
     protected $table = 'td_label1';
     protected $primaryKey = 'label1_id';
-    protected $fillable = ["create_by", "l1_qty", "product_mastar_id", "l1_stock", "l1_flag", "update_by"];
+    protected $fillable = ["create_by", "l1_qty", "product_mastar_id", "batch_no", "product_id", "l1_stock", "l1_flag", "update_by"];
+
+
+    public static function getLastBatchNoValue()
+    {
+        // Retrieve the last batch_no value
+        $lastBatchNo = self::orderBy('created_at', 'desc')->value('batch_no');
+
+        // Return 0 if the value is null
+        return $lastBatchNo ?? 0;
+    }
 }
