@@ -93,7 +93,6 @@ Route::middleware(['auth:sanctum', 'user-access:admin'])->group(function () {
 
 Route::middleware(['auth:sanctum', 'user-access:user1'])->group(function () {
     Route::prefix('l1')->group(function () {
-
         Route::post('/add', [Label1Action::class, 'add']);
         Route::post('/edit', [Label1Action::class, 'edit']);
         Route::get('/list', [Label1Action::class, 'list_l1']);

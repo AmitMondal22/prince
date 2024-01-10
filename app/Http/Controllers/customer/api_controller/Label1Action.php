@@ -15,24 +15,35 @@ class Label1Action extends ResponceBaseController
     {
         try {
             $rules = [
-                'l1_qty' => 'required|integer',
-                'product_mastar_id' => 'required|integer',
-                'product_id' => 'required|integer',
+                'master_product' => 'required',
+                'product_list' => 'required',
             ];
             $valaditor = Validator::make($r->all(), $rules);
             if ($valaditor->fails()) {
                 return $this->sendError("request validation error", $valaditor->errors(), 400);
             }
 
-            $data = TdLabel1::create([
-                "create_by" => auth()->user()->id,
-                "l1_qty" => $r->l1_qty,
-                "product_mastar_id" => $r->product_mastar_id,
-                "product_id" => $r->product_id,
-                "l1_stock" => "A",
-                "l1_flag" => "A",
-                "update_by" => auth()->user()->id
-            ]);
+            $batch_no = TdLabel1::getLastBatchNoValue();
+
+            $product_list = $r->product_list;
+            $master_product = $r->master_product;
+            $product_list['id_master_product'];
+            foreach ($product_list as $item) {
+                $productData = $item['product'];
+                $data = TdLabel1::create([
+                    "create_by" => auth()->user()->id,
+                    "l1_qty" => $item['qty'],
+                    "product_mastar_id" => $master_product['id_master_product'],
+                    "product_id" => $productData["product_id"],
+                    "l1_stock" => "A",
+                    "l1_flag" => "A",
+                    "batch_no" => $batch_no + 1,
+                    "update_by" => auth()->user()->id
+                ]);
+            }
+
+
+
 
             return $this->sendResponse($data, "Add work item successfully");
         } catch (\Throwable $th) {
@@ -57,13 +68,13 @@ class Label1Action extends ResponceBaseController
             }
             $batch_no = TdLabel1::getLastBatchNoValue();
 
-            foreach ($r->data as $rd){
+            foreach ($r->data as $rd) {
                 $data = TdLabel1::where("label1_id", $r->label1_id)->where("update_by", auth()->user()->id)->where("l1_stock", "A")->where("l1_flag", "A")->update([
                     "create_by" => auth()->user()->id,
                     "l1_qty" => $rd['l1_qty'],
                     "product_mastar_id" => $r->product_mastar_id,
                     "batch_no" => $batch_no + 1,
-                    "product_id"=>$rd['product_id'],
+                    "product_id" => $rd['product_id'],
                 ]);
             }
             /*$data = TdLabel1::where("label1_id", $r->label1_id)->where("update_by", auth()->user()->id)->where("l1_stock", "A")->where("l1_flag", "A")->update([
