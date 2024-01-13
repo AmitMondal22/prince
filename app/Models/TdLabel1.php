@@ -22,4 +22,10 @@ class TdLabel1 extends Model
         // Return 0 if the value is null
         return $lastBatchNo ?? 0;
     }
+
+    public function masterProduct()
+    {
+        return $this->belongsTo(MD_MasterProduct::class, 'product_mastar_id', 'id_master_product');
+    }
+
 }
