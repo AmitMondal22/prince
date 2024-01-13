@@ -34,7 +34,7 @@ class Label1Action extends ResponceBaseController
                 $data = TdLabel1::create([
                     "create_by" => auth()->user()->id,
                     "l1_qty" => $item['qty'],
-                    "product_mastar_id" => $master_product['id_master_product'],
+                    "product_mastar_id" => $master_product->id_master_product,
                     "product_id" => $productData["product_id"],
                     "l1_stock" => "A",
                     "l1_flag" => "A",
