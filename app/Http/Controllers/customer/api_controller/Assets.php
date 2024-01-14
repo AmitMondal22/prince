@@ -173,6 +173,7 @@ class Assets extends ResponceBaseController
         }
     }
 
+    
 
     function delete_product(Request $r): JsonResponse
     {
