@@ -164,7 +164,7 @@ class Assets extends ResponceBaseController
         try {
             $user_type=auth()->user()->type;
             $data = MdProduct::join("md_unit as a", "a.unit_id", "=", "md_product.unit_id")
-                ->join("users as b","b.id","=","md_product.")
+                ->join("users as b","b.id","=","md_product.user_type")
                 // ->where('md_product.user_type',$this->getUserType($user_type))
                 ->select("md_product.*", "a.unit_name", "a.unit_size")->get();
             return $this->sendResponse($data, "Unit List");
@@ -173,7 +173,7 @@ class Assets extends ResponceBaseController
         }
     }
 
-    
+
 
     function delete_product(Request $r): JsonResponse
     {
