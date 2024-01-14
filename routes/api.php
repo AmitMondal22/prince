@@ -47,7 +47,7 @@ Route::middleware(['auth:sanctum'])->group(function () {
             Route::post('/add', [Assets::class, 'product_add']);
             Route::post('/edit', [Assets::class, 'product_edit']);
             Route::post('/delete', [Assets::class, 'delete_product']);
-            Route::get('/list', [Assets::class, 'list_product_mastar']);
+            Route::get('/list', [Assets::class, 'list_product_mastar_admin']);
         });
 
         Route::get('/master_product/list', [Assets::class, 'list_master_product']);

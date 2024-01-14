@@ -35,7 +35,7 @@ class Label1Action extends ResponceBaseController
                     "create_by" => auth()->user()->id,
                     "l1_qty" => $item['qty'],
                     "product_mastar_id" => $master_product->id_master_product,
-                    "product_id" => $productData["product_id"],
+                    "product_id" => $productDa0ta["product_id"],
                     "l1_stock" => "A",
                     "l1_flag" => "A",
                     "batch_no" => $batch_no + 1,
