@@ -14,7 +14,7 @@ class Label1Action extends ResponceBaseController
 {
     function add(Request $r): JsonResponse
     {
-        // try {
+        try {
             $rules = [
                 'master_product' => 'required',
                 'product_list' => 'required',
@@ -47,9 +47,9 @@ class Label1Action extends ResponceBaseController
 
 
             return $this->sendResponse($data, "Add work item successfully");
-        // } catch (\Throwable $th) {
-        //     return $this->sendError("exception handler error", $th, 400);
-        // }
+        } catch (\Throwable $th) {
+            return $this->sendError("exception handler error", $th, 400);
+        }
     }
 
 
