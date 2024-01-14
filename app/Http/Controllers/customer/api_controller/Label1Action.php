@@ -96,7 +96,7 @@ class Label1Action extends ResponceBaseController
     function list_l1(Request $r): JsonResponse
     {
         try {
-            $data = TdLabel1::join("md_product as a", 'a.product_id', '=', 'td_label1.product_mastar_id')
+            $data = TdLabel1::join("md_product as a", 'a.product_id', '=', 'td_label1.product_id')
             ->join("md_unit as b", 'b.unit_id', '=', 'a.unit_id')
             ->join("md_master_product as c", 'td_label1.product_mastar_id', '=', 'c.id_master_product')
             ->where("td_label1.update_by", auth()->user()->id)
