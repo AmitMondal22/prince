@@ -61,7 +61,7 @@ class Label2Action extends ResponceBaseController
                 "create_by" => auth()->user()->id,
                 "l2_qty" => $r->l2_qty,
                 //"qty" => $r->l2_qty,
-                "product_mastar_id" => $r->product_mastar_id
+                "batch_no" => $r->batch_no
             ]);
 
             return $this->sendResponse($data, "Edit Wrok item successfully");
