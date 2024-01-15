@@ -18,7 +18,7 @@ class Label3Action extends ResponceBaseController
         try {
             $rules = [
                 'l3_qty' => 'required|integer',
-                'product_mastar_id' => 'required|integer',
+                'batch_no' => 'required|integer',
             ];
             $valaditor = Validator::make($r->all(), $rules);
             if ($valaditor->fails()) {
@@ -28,7 +28,7 @@ class Label3Action extends ResponceBaseController
             $data = TdLabel3::create([
                 "create_by" => auth()->user()->id,
                 "l3_qty" => $r->l3_qty,
-                "product_mastar_id" => $r->product_mastar_id,
+                "batch_no" => $r->batch_no,
                 "l3_stock" => "A",
                 "l3_flag" => "A",
                 "update_by" => auth()->user()->id
@@ -63,7 +63,7 @@ class Label3Action extends ResponceBaseController
             $rules = [
                 'l3_qty' => 'required|integer',
                 'label3_id' => 'required|integer',
-                'product_mastar_id' => 'required|integer',
+                'batch_no' => 'required|integer',
             ];
             $valaditor = Validator::make($r->all(), $rules);
             if ($valaditor->fails()) {
@@ -74,7 +74,7 @@ class Label3Action extends ResponceBaseController
                 "create_by" => auth()->user()->id,
                 "l3_qty" => $r->l3_qty,
                 //"qty" => $r->l3_qty,
-                "product_mastar_id" => $r->product_mastar_id
+                "batch_no" => $r->batch_no
             ]);
 
             return $this->sendResponse($data, "Edit Wrok item successfully");
@@ -87,11 +87,14 @@ class Label3Action extends ResponceBaseController
     function list_l3(Request $r): JsonResponse
     {
         try {
-            $data = TdLabel3::join("md_product as a", 'a.product_id', '=', 'td_label3.product_mastar_id')
-                ->join("md_unit as b", 'b.unit_id', '=', 'a.unit_id')
-                ->where("td_label3.update_by", auth()->user()->id)
-                ->where("td_label3.l3_stock", "A")->where("td_label3.l3_flag", "A")
-                ->select("td_label3.*", "a.product_name", "a.qty", "b.*")->get();
+            // $data = TdLabel3::join("md_product as a", 'a.product_id', '=', 'td_label3.product_mastar_id')
+            //     ->join("md_unit as b", 'b.unit_id', '=', 'a.unit_id')
+            //     ->where("td_label3.update_by", auth()->user()->id)
+            //     ->where("td_label3.l3_stock", "A")->where("td_label3.l3_flag", "A")
+            //     ->select("td_label3.*", "a.product_name", "a.qty", "b.*")->get();
+            $data = TdLabel3::where("update_by", auth()->user()->id)
+            ->where("l3_stock", "A")->where("l3_flag", "A")
+            ->get();
 
             return $this->sendResponse($data, " ");
         } catch (\Throwable $th) {

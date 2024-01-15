@@ -16,7 +16,7 @@ class Label4Action extends ResponceBaseController
     {
         try {
             $rules = [
-                'l4_qty' => 'required|integer',
+                'l3_id' => 'required|integer',
                 'product_mastar_id' => 'required|integer',
             ];
             $valaditor = Validator::make($r->all(), $rules);
@@ -25,7 +25,7 @@ class Label4Action extends ResponceBaseController
             }
             $data = TdLabel4::create([
                 "create_by" => auth()->user()->id,
-                "l4_qty" => $r->l4_qty,
+                "l3_id" => $r->l3_id,
                 "product_mastar_id" => $r->product_mastar_id,
                 "l4_stock" => "A",
                 "l4_flag" => "A",
