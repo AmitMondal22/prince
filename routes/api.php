@@ -104,7 +104,6 @@ Route::middleware(['auth:sanctum', 'user-access:user2'])->group(function () {
 
     Route::prefix('l2')->group(function () {
         Route::get('/work_list', [Label2Action::class, 'work_list']);
-
         Route::post('/add', [Label2Action::class, 'add']);
         Route::post('/edit', [Label2Action::class, 'edit']);
         Route::get('/list', [Label2Action::class, 'list_l2']);
@@ -129,7 +128,9 @@ Route::middleware(['auth:sanctum', 'user-access:user4'])->group(function () {
         Route::post('/add', [Label4Action::class, 'add']);
         Route::post('/edit', [Label4Action::class, 'edit']);
         Route::get('/list', [Label4Action::class, 'list_l4']);
+        Route::get('/work_list', [Label2Action::class, 'work_list']);
         // Route::post('/list', [Label2Action::class, 'list_l1']);
+        Route::get('/work_list', [Label4Action::class, 'work_list']);
     });
 });
 
