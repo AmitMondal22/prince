@@ -17,7 +17,7 @@ class Label4Action extends ResponceBaseController
         try {
             $rules = [
                 'l3_id' => 'required|integer',
-                'product_mastar_id' => 'required|integer',
+                'batch_no' => 'required|integer',
             ];
             $valaditor = Validator::make($r->all(), $rules);
             if ($valaditor->fails()) {
@@ -26,9 +26,7 @@ class Label4Action extends ResponceBaseController
             $data = TdLabel4::create([
                 "create_by" => auth()->user()->id,
                 "l3_id" => $r->l3_id,
-                "product_mastar_id" => $r->product_mastar_id,
-                "l4_stock" => "A",
-                "l4_flag" => "A",
+                "batch_no" => $r->batch_no,
                 "update_by" => auth()->user()->id
             ]);
             //$data2=TdLabel4::where("update_by",auth()->user()->id)->where("l2_stock","A")->where("l2_flag","A")->update(["l2_stock"=>"B","l2_flag"=>"B"]);
