@@ -111,8 +111,6 @@ return [
             'expire' => 60,
             'throttle' => 60,
         ],
-
-
         'customer_api' => [
             'provider' => 'customer_api',
             'table' => 'password_reset_tokens',

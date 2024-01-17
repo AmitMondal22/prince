@@ -51,6 +51,7 @@ Route::middleware(['auth:sanctum'])->group(function () {
         });
 
         Route::get('/master_product/list', [Assets::class, 'list_master_product']);
+        Route::get('/batch_master_product', [Assets::class, 'list_batch_mastet']);
 
     });
 });
