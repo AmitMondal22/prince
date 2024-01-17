@@ -51,6 +51,7 @@ class Label2Action extends ResponceBaseController
             $rules = [
                 'l2_qty' => 'required|integer',
                 'batch_no' => 'required|integer',
+                'label2_id' => 'required|integer',
             ];
             $valaditor = Validator::make($r->all(), $rules);
             if ($valaditor->fails()) {
