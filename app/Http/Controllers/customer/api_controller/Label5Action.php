@@ -4,6 +4,7 @@ namespace App\Http\Controllers\customer\api_controller;
 
 use App\Http\Controllers\assets\ResponceBaseController;
 use App\Http\Controllers\Controller;
+use App\Models\TdLabel4;
 use App\Models\TdLabel5;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
@@ -74,6 +75,25 @@ class Label5Action extends ResponceBaseController
                 ->where("td_label5.update_by", auth()->user()->id)
                 ->where("td_label5.l5_stock", "A")->where("td_label5.l5_flag", "A")
                 ->select("td_label5.*", "a.product_name", "a.qty", "b.*")->get();
+
+            return $this->sendResponse($data, " ");
+        } catch (\Throwable $th) {
+            return $this->sendError("exception handler error", $th, 400);
+        }
+    }
+
+
+    function work_list(Request $r): JsonResponse
+    {
+        try {
+            $data = TdLabel4::get();
+
+
+                // $data = TdLabel4::join("md_product as a", 'a.product_id', '=', 'td_label4.product_mastar_id')
+                // ->join("md_unit as b", 'b.unit_id', '=', 'a.unit_id')
+                // ->where("td_label4.update_by", auth()->user()->id)
+                // ->where("td_label4.l4_stock", "A")->where("td_label4.l4_flag", "A")
+                // ->select("td_label4.*", "a.product_name", "a.qty", "b.*")->get();
 
             return $this->sendResponse($data, " ");
         } catch (\Throwable $th) {

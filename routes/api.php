@@ -141,6 +141,7 @@ Route::middleware(['auth:sanctum', 'user-access:user5'])->group(function () {
         Route::post('/edit', [Label5Action::class, 'edit']);
         Route::get('/list', [Label5Action::class, 'list_l5']);
         // Route::post('/list', [Label2Action::class, 'list_l1']);
+        Route::get('/work_list', [Label5Action::class, 'work_list']);
     });
 });
 
